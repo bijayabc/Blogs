@@ -1,15 +1,12 @@
 const express = require("express");
-const app = express();
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 require('dotenv').config();  // Ensure dotenv is properly configured
 const blogRoutes = require('./routes/blogRoutes')
 
-const PORT = process.env.PORT || 3000;
+const app = express();
 
-// app.listen(PORT, () => { 
-//     console.log(`Server is running on port ${PORT}`); 
-// });
+const PORT = process.env.PORT || 3000;
 
 // connect to database
 const dbURI = process.env.DB_URI
