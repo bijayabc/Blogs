@@ -5,3 +5,5 @@ node_modules/
 
 # Ignore environment variable file
 .env
+
+package-lock.json
