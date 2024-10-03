@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+const blogRoutes = require('./routes/blogRoutes')
 
 const PORT = process.env.PORT || 3000;
 
@@ -26,8 +27,12 @@ app.use(express.urlencoded({ extended: true })); // Middleware to parse form dat
 app.use(morgan('dev')) // log the nature of the request to the console
 app.use(express.json()); // Middleware to parse JSON bodies
 
-app.get("/", (req, res) => { 
-    res.send("Express on Vercel after link to mongoDB"); 
-});
+// handle routes
+app.get('/', (req, res) => {
+    res.redirect('/blogs')
+})
+
+// handle /blogs get route
+app.use(blogRoutes)
 
 module.exports = app;
