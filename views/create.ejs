@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <main>
+        <h1>Create a New Blog</h1>
+
+        <form action="/blogs" method="POST">
+            <div>
+                <label for="title">Blog Title</label>
+                <input type="text" name="title" id="title" maxlength="30" required>
+            </div>
+            
+            <div>
+                <label for="snippet"> Blog Snippet</label>
+                <input type="text" name="snippet" id="snippet" maxlength="80" required>
+            </div>            
+            
+            <div>
+                <label for="password"> Authorization Password</label>
+                <input type="password" name="password" id="password" maxlength="20" required>
+            </div>
+            
+            <div>
+                <label for="body">Body</label>
+                <textarea name="body" id="body" rows="12" required></textarea>
+            </div>
+
+            <button type="submit">
+                Submit
+            </button>
+            
+        </form>
+
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+
+</html>

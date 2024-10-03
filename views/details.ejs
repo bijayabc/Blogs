@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <main>
+        <h1> <%= blog.title %> </h1>
+
+        <!-- This custom data-item attribute in this tag stores the id of the blog to be deleted which is used in the script below -->
+        <div class="trashcan" title="delete blog" 
+        id="trashcan" data-item="<%= blog.id %>">
+            <img src="/trashcan.svg" alt="bin icon">
+        </div>
+
+        <div class="blog-body"> <%= blog.body %> </div>
+
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+        const trashcan = document.getElementById('trashcan')
+
+        trashcan.addEventListener('click', (e) => {
+            // prompt user for password before deletion
+            const user_password = window.prompt('Enter the authorization password in order to confirm the deletion: ')
+
+            // first verify the password by sending a request to the server. 
+            // The password string the user provided is stored in the body of the API call
+            fetch('/verify-password', {
+                method: 'POST', 
+                headers: {'Content-Type': 'application/json'}, 
+                body: JSON.stringify({ password: user_password }),
+            })
+            .then(res => res.json())
+            .then(data => {
+
+                // If the server returns true (i.e password is correct, send a delete request to server and redirect to the /blogs page)
+                if (data.isValid) {
+                    endpoint = `/blogs/${trashcan.dataset.item}` // id of the blog to be deleted
+
+                    fetch(endpoint, { method: 'DELETE' })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            window.location.href = data.redirect
+                        })
+                        .catch(err => console.log(err))
+                } else {
+                    window.alert('You gotta stop guessing the passwords like this. Do you know how many eons it would take you to try all the combinations this way? You know what, let me give you a hint: MY_FUTURE_PET_NAME + MY_DOB + MY_FAV_COLOR + 3_SPECIAL_CHARACTERS')
+                }
+            })
+            .catch(err => console.log(err))
+        })
+    </script>
+
+</body>
+
+</html>
+

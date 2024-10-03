@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <main>
+        <h1>All Blogs</h1>
+
+        <% if (blogs.length > 0) { %> 
+            <% blogs.forEach(blog => { %>
+                    <a href="/blogs/<%= blog.id %>">
+                        <div class="blog">
+                            <div>
+                                <h4 class="blog-title"><%= blog.title %></h4>
+                                <p class="blog-snippet"><%= blog.snippet %></p>
+                            </div>
+                            <!-- Using mongodb's inbuilt timestamps to record the time blog was created. -->
+                            <p><%= blog.createdAt.toDateString() %></p>
+                        </div>
+                    </a>
+            <% }) %>
+        <% } else { %>
+                <p class="screen-message"> There are no blogs to display </p>
+            <% } %>
+
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+
+</html>

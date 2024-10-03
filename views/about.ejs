@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <main>
+        <h1>About</h1>
+
+        <p class="about">
+
+            This is a blog platform that I built using Node.js, Express and MongoDB. "Built" is a bit of a stretch because I got a lot of help from an online tutorial 
+            but hey,  isn't that how we all learn? Basically, I wanted to learn more about backend and database after I finished building my  portfolio website using 
+            React (click on the footer text to check it out). Building this was a great experience, I learned a ton of new things. Plus I now have a place to spew all
+             the nonsense that pops up in my head. <br><br>
+
+            I was too lazy to learn about authentication, individual user sign-ups, and personalized accounts for everyone using Node.js (I did that for the CS50 Finance 
+            project with Python and SQLite3, which you can check out on my website). So, I created an authorization password that’s required to post or delete a blog. 
+            I used MongoDB for the database and Node.js for server-side logic. I also used Express to build a flexible and efficient API for handling HTTP requests and 
+            Mongoose to simplify MongoDB interactions with powerful data modeling and validation features. <br><br>
+
+            Thank you for visiting! And try to have an awesome day!
+        </p>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+
+</html>
