@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+require('dotenv').config();  // Ensure dotenv is properly configured
 const blogRoutes = require('./routes/blogRoutes')
 
 const PORT = process.env.PORT || 3000;
@@ -11,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 // });
 
 // connect to database
-const dbURI = 'mongodb+srv://bijayabc:DRDDkUnvnofOsyCC@node-app.ju9ze.mongodb.net/blogs?retryWrites=true&w=majority&appName=node-app'
+const dbURI = process.env.DB_URI
 mongoose.connect(dbURI)
     .then((result) => {
         app.listen(3000, () => console.log(`Server is running on port ${PORT}`));
@@ -32,7 +33,27 @@ app.get('/', (req, res) => {
     res.redirect('/blogs')
 })
 
+app.get('/about', (req, res) => {
+    res.render('about.ejs', { title: 'About' })
+})
+
+// Checks if the password is correct and returns a boolean JSON object accordingly
+app.post('/verify-password', (req, res) => {
+    const user_password = req.body.password
+
+    if (user_password === process.env.AUTH_PASSWORD) {
+        res.json( { isValid: true} )
+    } else {
+        res.json( {isValid: false} )
+    }
+})
+
 // handle /blogs get route
 app.use(blogRoutes)
+
+// handle error when no routes match
+app.use((req, res) => {
+    res.status(404).render('error.ejs', { title: 'Error' , message: 'The server encountered an error while executing your request.'});
+})
 
 module.exports = app;
