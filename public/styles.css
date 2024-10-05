@@ -170,6 +170,10 @@ button {
         margin: 0;
     }
 
+    main {
+        margin: 3rem 1rem;
+    }
+
     .trashcan {
         position: static;
     }
@@ -206,8 +210,11 @@ button {
         width: 90%;
         padding: 1rem 1rem;
         margin-bottom: 2rem;
-        border-radius: 0 5px 5px 0;
         font-size: 0.9rem;
+    }
+
+    .blog-body {
+        box-shadow: none;
     }
 
     main h1 {
@@ -219,6 +226,6 @@ button {
     }
 
     form {
-        width: 95%;
+        width: 70%;
     }
   }
