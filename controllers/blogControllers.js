@@ -25,7 +25,7 @@ const blog_create_post = (req, res) => {
             })
             .catch(err => console.log(err))
     } else {
-        res.render('error', {title: 'Error', message: 'You really thought you could just guess the password huh?' })
+        res.render('error', {title: 'Error', message: 'SORRY! The Password is incorrect!' })
     }
 }
 
